@@ -58,6 +58,40 @@
       };
     }
 
+    const images = document.querySelectorAll('.slide-in')
+    console.log(`images`, images)
+
+    function checkShowImage () {
+        console.log('checkShow');
+        
+        images.forEach( image => {
+          /* console.log(image.offsetTop + image.height); */
+          const midImageY = image.offsetTop + (image.height / 2)
+          /* console.log(window.scrollY + window.innerHeight); */
+          const windowBottom = window.scrollY + window.innerHeight
+          const imageToSlide = windowBottom > midImageY
+          /* console.log(`windowBottom`, windowBottom)
+          console.log(`midImageY`, midImageY)
+          console.log(`imageToSlide`, imageToSlide) */
+          const imageBottomY = image.offsetTop + image.height
+          const imagePast = window.scrollY > imageBottomY 
+/*           console.log(`windowBottom`, windowBottom)
+          console.log(`imageBottomY`, imageBottomY)
+          console.log(`imagePast`, imagePast) */
+          /*  */
+          if (imageToSlide && !imagePast) {
+            console.log(true);
+            
+            image.classList.add('active')
+          } else {
+            image.classList.remove('active')
+
+          }
+        })
+    }
+
+   window.addEventListener('scroll', debounce(checkShowImage))
+
   </script>
 
   <style>
